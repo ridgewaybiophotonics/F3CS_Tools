@@ -1,0 +1,119 @@
+Prototype Data File for F3CS_GlobalFit
+//
+Curves to Consider
+G0x0=1
+G1x1=1
+G2x2=1
+G0x1=1
+G1x2=1
+G2x0=1
+G0x1x2=1
+G1x2x0=1
+G2x0x1=1
+//
+Intensity_Weight=1.0
+//
+Fitting Parameters
+//parameter=float \tab fix=int {0=fix, 1=vary}
+N_t_0=-7.0,1
+N_t_1=7.0,1
+N_t_2=7.0,1
+N_t_3=14.0,1
+N_t_4=7.0,1
+N_t_5=7.0,1
+N_t_6=-3.0,1
+N_t_7=-5.0,1
+N_t_8=-6.0,1
+N_t_9=9.0,1
+tauD_0=30,0
+tauD_1=30,0
+tauD_2=30,0
+tauD_3=40,0
+tauD_4=40,0
+tauD_5=40,0
+tauD_6=30,0
+tauD_7=30,0
+tauD_8=30,0
+tauD_9=30,0
+omega=1.1,0
+gamma_R=1.65,0
+g_inf0x0=0.0001,1
+g_inf1x1=0.0001,1
+g_inf2x2=0.0001,1
+g_inf0x1=0.0001,1
+g_inf1x2=0.0001,1
+g_inf2x0=0.0001,1
+g_inf0x1x2=0.000001,1
+tauf_0=1.0,0
+tauf_1=1.0,0
+tauf_2=1.0,0
+tauf_3=1.0,0
+tauf_4=1.0,0
+tauf_5=1.0,0
+tauf_6=1.0,0
+tauf_7=1.0,0
+tauf_8=1.0,0
+tauf_9=1.0,0
+T0_0=-0.5,0
+T0_1=-0.5,0
+T0_2=-0.5,0
+T0_3=-0.5,0
+T0_4=-0.5,0
+T0_5=-0.5,0
+T0_6=-0.5,0
+T0_7=-0.5,0
+T0_8=-0.5,0
+T0_9=-0.5,0
+gamma_0=0.35,0
+gamma_1=0.35,0
+gamma_2=0.35,0
+gamma_3=0.35,0
+gamma_4=0.35,0
+gamma_5=0.35,0
+gamma_6=0.35,0
+gamma_7=0.35,0
+gamma_8=0.35,0
+gamma_9=0.35,0
+frac_gamma_0=0.33,0
+frac_gamma_1=0.33,0
+frac_gamma_2=0.33,0
+frac_gamma_3=0.33,0
+frac_gamma_4=0.33,0
+frac_gamma_5=0.33,0
+frac_gamma_6=0.33,0
+frac_gamma_7=0.33,0
+frac_gamma_8=0.33,0
+frac_gamma_9=0.33,0
+q_0_0=100.0,1
+q_1_1=100.0,1
+q_2_2=100.0,1
+Xi={{1.0,0.2,0.0},{0.02,1.0,0.2},{0.01,0.02,1.0}}
+etaform is {ch0{dye0,dye1,dye2},ch1{dye0,dye1,dye2},ch2{dye0,dye1,dye2}}
+bg_0=1.0,0	
+bg_1=1.0,0
+bg_2=1.0,0
+Channel_Correction_0=1.0,0 (Only Select N-1, where N=Num channels)
+Channel_Correction_1=1.0,0 (Only Select N-1, where N=Num channels)
+Channel_Correction_2=1.0,0 (Only Select N-1, where N=Num channels)
+occ_0={1.000,0.000,0.000,1.000,0.000,0.000,1.000,0.000,1.000,1.000}
+occ_1={0.000,1.000,0.000,0.000,1.000,0.000,1.000,1.000,0.000,1.000}
+occ_2={0.000,0.000,1.000,0.000,0.000,1.000,0.000,1.000,1.000,1.000}
+Veff{0x0=1.0, 1x1=1.0, 2x2=1.0, 0x1=1.0, 1x2=1.0, 2x0=1.0}
+//Intensity in Hz, (bg,q) in kHz
+Data Location, Description (timepoints 0-indexed)
+num_entries=1
+tag=_test1 timepoint = 0.0
+//
+Fit Ranges:      Start 5, Stop -4 -> i\in{0+5,(416-1)-4}
+fit_range_start = 1
+fit_range_stop = 0
+fit_range_start_triplecorr = 1
+fit_range_stop_triplecorr = 0
+//
+k2=1.0159e-9,4.55783e-8,3.478e-8
+k3=-4.5567e-16,-7.7714e-14,-6.1518e-14
+k4=0.0,3.68195e-20,2.9213e-20
+//
+Plot_Z_max = 0.02,1
+Plot_Z_min = -0.001,1
+Random string to verify file completeness:  7392342
