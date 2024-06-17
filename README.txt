@@ -1,7 +1,8 @@
 /*
  *  README.txt
+ *  Software created by William Ridgeway 2007-2012 while at TSRI
+ *  Current maintanance by same author, now at Ridgeway Biophotonics
  *
- *    o
  *   /   Created by William Ridgeway 2007-2012.
  *  o
  *   \   
@@ -16,7 +17,48 @@
  *  Correlation Spectroscopy, 2012
  *
  */
- 
+
+
+// Build instructions 6/2024
+
+
+
+// Install last v 1.x version of GSL, as the non-linear fitting routines
+// change their API in versions 2.x
+wget https://gnu.mirror.constant.com/gsl/gsl-1.16.tar.gz
+gunzip gsl-1.16.tar.gz
+tar -xvf gsl-1.16.tar
+cd gsl-1.16
+./configure
+make -j 6
+sudo make install
+cd ..
+
+// Compile the portion of F3CS_Tools used to analyze data (no data acquisition)
+git clone https://github.com/ridgewaybiophotonics/F3CS_Tools.git
+cd F3CS_Tools/
+make clean
+make no_libraries_reqd
+make gsl_reqd
+cd ..
+
+# Test, take a look at the F3CS_Manual.pdf for expected output
+mkdir -p testData
+cd testData/
+../F3CS_Tools/F3CS_StochasticData _test1 100
+../F3CS_Tools/F3CS_2FCS _test1 1 6 8
+../F3CS_Tools/F3CS_Outlier2 _test1 1 3.0 -1
+../F3CS_Tools/F3CS_AxBxG _test1 1 6 8
+../F3CS_Tools/F3CS_Outlier3 _test1 1 3.0 -1
+cp ../F3CS_Tools/input.local.txt .
+../F3CS_Tools/F3CS_LocalFit input.local.txt badfit
+cp ../F3CS_Tools/input.global.txt .
+../F3CS_Tools/F3CS_GlobalFit input.global.txt demo 0 fitdata
+
+
+
+
+
 /* ===== List of programs in the Triple Correlation Toolbox ====== */
 
 16 executables comprise the Triple Correlation Toolbox package:

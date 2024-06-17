@@ -18,13 +18,14 @@
 
 #CC = -/usr/local/bin/gcc
 CC = -/usr/bin/gcc
-CFLAGS = -O3 -msse3 -g -Wall -funroll-all-loops -D_FILE_OFFSET_BITS=64
-LFLAGS = -O3 -msse3 -Wall -funroll-all-loops -D_FILE_OFFSET_BITS=64
+CFLAGS = -O3 -msse3 -g -fcommon -funroll-all-loops -D_FILE_OFFSET_BITS=64
+LFLAGS = -O3 -msse3 -fcommon -funroll-all-loops -D_FILE_OFFSET_BITS=64
 
 #	*******************************************
 #	Make categories, organized by the libraries 
 #	that are required by each executable
 #	*******************************************
+
 
 all: no_libraries_reqd gsl_reqd nidaqmx_reqd plplot_reqd nidaqmx_AMD_reqd
 
@@ -37,6 +38,11 @@ nidaqmx_reqd: F3CS_DAQ F3CS_AlignTool
 plplot_reqd:  F3CS_GlobalFit_3D_Plot
 
 nidaqmx_AMD_reqd: F3CS_DAQ_ASM
+
+docker_static: LFLAGS += -static
+docker_static: no_libraries_reqd gsl_reqd
+
+
 
 #	*******************************************
 #		     Programs, linking
@@ -55,7 +61,7 @@ F3CS_Reverser: Reverser.o
 	$(CC) Reverser.o -o F3CS_Reverser -lm $(LFLAGS)
 
 F3CS_StochasticData: StochasticData.o
-	$(CC) StochasticData.o -o F3CS_StochasticData -lm -lgsl -lgslcblas -pthread $(LFLAGS)
+	$(CC) StochasticData.o -o F3CS_StochasticData -lgsl -lgslcblas -lm -pthread $(LFLAGS)
 
 F3CS_AlignTool: AlignTool.o fast_sse_ttl_loops.o DAQ_lib.h complib.h
 	$(CC) AlignTool.o fast_sse_ttl_loops.o -o F3CS_AlignTool -ldl -lm -pthread -lnidaqmx $(LFLAGS) -lnidaqmx `pkg-config --cflags gtk+-2.0 gthread-2.0` `pkg-config --libs gtk+-2.0 gthread-2.0`
@@ -82,13 +88,13 @@ F3CS_2FCS:	2FCS.o corr_int_2FCS.o
 	$(CC) 2FCS.o corr_int_2FCS.o -o F3CS_2FCS -lm -pthread $(LFLAGS)
 
 F3CS_LocalFit:	LocalFit.o
-	$(CC) LocalFit.o -o F3CS_LocalFit -lm -lgsl -lgslcblas $(LFLAGS)
+	$(CC) LocalFit.o -o F3CS_LocalFit -lgsl -lgslcblas -lm $(LFLAGS)
 
 F3CS_GlobalFit:	GlobalFit.o
-	$(CC) GlobalFit.o -o F3CS_GlobalFit -lm -lgsl -lgslcblas $(LFLAGS)
+	$(CC) GlobalFit.o -o F3CS_GlobalFit -lgsl -lgslcblas -lm $(LFLAGS)
 	
 F3CS_GlobalFit_3D_Plot:	GlobalFit_3D_Plot.o
-	$(CC) GlobalFit_3D_Plot.o -o F3CS_GlobalFit_3D_Plot -lm -lgsl -lgslcblas -lplplotd $(LFLAGS)
+	$(CC) GlobalFit_3D_Plot.o -o F3CS_GlobalFit_3D_Plot -lgsl -lgslcblas -lplplotd -lm $(LFLAGS)
 	
 #	*******************************************
 #		     Objects, compilation
